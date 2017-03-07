@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Created by java on 21.02.2017.
- */
+
 public class CommandLineApp {
 
     private static final String DEFAULT_PATH = "C:\\";
@@ -59,13 +57,13 @@ public class CommandLineApp {
             System.out.println("Do you want to save changes y/n ?");
             String answer = scanner.nextLine();
             if(answer.contains("y")){
+                File file = new File(parent.getAbsolutePath() + "\\" + fileName);
+                try(FileWriter writer = new FileWriter(parent.getAbsolutePath() + "\\" + fileName, true)) {
+                    
 
-                try(PrintWriter writer = new PrintWriter(parent.getAbsolutePath() + "\\" + fileName)) {
-                    FileReader reader = new FileReader(parent.getAbsolutePath() + "\\" + fileName);
-
-                    writer.print(reader + lineOfChanges);
+                    writer.write(lineOfChanges);
                     writer.close();
-                    reader.close();
+                    
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
